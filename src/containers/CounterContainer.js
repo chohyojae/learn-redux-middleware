@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { increase, decrease } from "../modules/counter";
+import {
+  asyncDispatchIncrease,
+  asyncDispatchDecrease,
+} from "../modules/counter";
 import Counter from "../components/Counter";
 
 import { useCallback } from "react";
@@ -20,9 +23,17 @@ import { useSelector, useDispatch } from "react-redux";
 
 // export default React.memo(CounterContainer);
 
-const CounterContainer = ({ number, increase, decrease }) => {
+const CounterContainer = ({
+  number,
+  asyncDispatchIncrease,
+  asyncDispatchDecrease,
+}) => {
   return (
-    <Counter number={number} onIncrease={increase} onDecrease={decrease} />
+    <Counter
+      number={number}
+      onIncrease={asyncDispatchIncrease}
+      onDecrease={asyncDispatchDecrease}
+    />
   );
 };
 
@@ -31,7 +42,7 @@ export default connect(
     number: state.counter,
   }),
   {
-    increase,
-    decrease,
+    asyncDispatchIncrease,
+    asyncDispatchDecrease,
   }
 )(CounterContainer);
